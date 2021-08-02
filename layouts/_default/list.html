@@ -1,0 +1,28 @@
+{{define "main"}}
+<section class="post-list">
+    {{range .Paginator.Pages}}
+    <article class="single-post-border-bottom pb-4">
+        <h2 class="entry-title mt-4 mb-4">
+            <a href="{{.Permalink}}">{{.Title}}</a>
+        </h2>
+        <div class="post-mets">
+            <span class="post-author">Posted by: {{.Params.Author}}</span>
+            <span class="post-date">
+                <time>{{dateFormat .Site.Params.dateFormat .Date}}</time>
+            </span>
+        </div>
+        <div class="post-tags">
+            {{range (.GetTerms "tags")}}
+                <a href="{{.Permalink}}">{{ .LinkTitle}}</a>
+            {{end}}
+        </div>
+        <div class="entry-content">
+            {{.Summary}}
+        </div>
+    </article>
+    {{end}}
+    <div class="mt-4">
+        {{template "_internal/pagination.html" .}}
+    </div>
+</section>
+{{end}}
